@@ -1,0 +1,8 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8080
+  },
+  "database": "postgres://localhost:5432",
+  "debug_mode": true
+}

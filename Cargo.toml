@@ -1,0 +1,21 @@
+[package]
+name = "rs_lib_ng"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"
+chrono = { version = "0.4", features = ["serde"] }
+chrono-tz = "0.9"
+arc-swap = "1.6"
+reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
+sysinfo = "0.30"
+aes = "0.8"
+cbc = "0.1"
+cipher = { version = "0.4", features = ["block-padding"] }
+base64 = "0.22"
+hex = "0.4"
+figment = { version = "0.10", features = ["toml", "env", "json"] }
