@@ -110,3 +110,11 @@ async fn example_post(client: &KyHttp) -> Result<(), rs_lib_ng::core::error::NgE
     Ok(())
 }
 ```
+## Overriding Request Options
+You can pass `KyOptions` to any KyHttp call to change retries or timeouts for that specific request without changing global settings.
+
+```rust
+let mut opts = KyOptions::default();
+opts.retry = 5; // Increase retries for unstable connections
+let status = service.fetch_status(Some(opts)).await?;
+```
