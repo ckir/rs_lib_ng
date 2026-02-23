@@ -1,8 +1,9 @@
 use serde::{Deserialize, Serialize};
 use chrono::NaiveDate;
-use crate::markets::cnn::apicall::ApiCall;
+use crate::markets::cnn::apicallcnn::CnnApi; // Correctly import CnnApi
 use crate::core::error::NgError;
 use crate::loggers::Logger;
+// use crate::error; // Commented out to fix unused import warning
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct FngData {
@@ -17,7 +18,7 @@ pub struct FearAndGreedResponse {
 }
 
 pub struct FearAndGreed {
-    api: ApiCall,
+    api: CnnApi,
     #[allow(dead_code)]
     logger: Logger,
 }
@@ -25,7 +26,7 @@ pub struct FearAndGreed {
 impl FearAndGreed {
     pub fn new(logger: Logger) -> Self {
         Self {
-            api: ApiCall::new(logger.clone()),
+            api: CnnApi::new(logger.clone()),
             logger,
         }
     }

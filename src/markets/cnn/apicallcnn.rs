@@ -5,12 +5,12 @@ use crate::loggers::Logger;
 use crate::core::error::NgError;
 use crate::error;
 
-pub struct ApiCall {
+pub struct CnnApi {
     http: KyHttp,
     logger: Logger,
 }
 
-impl ApiCall {
+impl CnnApi {
     pub fn new(logger: Logger) -> Self {
         Self {
             http: KyHttp::new(logger.clone()),
@@ -46,7 +46,7 @@ impl ApiCall {
     pub async fn call(&self, endpoint: &str) -> Result<Value, NgError> {
         let url = format!("https://production.dataviz.cnn.io/index/fearandgreed/{}", endpoint.trim_start_matches('/'));
         
-        match self.http.get_json::<Value>(&url, self.get_cnn_headers()).await {
+        match self.http.get::<Value>(&url, self.get_cnn_headers()).await {
             Ok(resp) if resp.success => Ok(resp.data.unwrap_or_default()),
             Ok(resp) => {
                 let err_msg = format!("CNN API Failure: Status {}", resp.status);
@@ -55,8 +55,9 @@ impl ApiCall {
                 Err(NgError::HttpError(err_msg))
             }
             Err(e) => {
-                error!(self.logger, "CNN Connection Error", "error" => e.to_string());
-                Err(e)
+                let err_detail = e.to_string();
+                error!(self.logger, "CNN Connection Error", "error" => err_detail);
+                return Err(e);
             }
         }
     }

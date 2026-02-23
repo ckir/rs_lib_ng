@@ -8,7 +8,7 @@ pub mod cloud;
 
 pub struct ConfigManager {
     current: ArcSwap<Value>,
-    source_info: String,
+    _source_info: String,
 }
 
 impl ConfigManager {
@@ -26,7 +26,7 @@ impl ConfigManager {
 
         Ok(Self {
             current: ArcSwap::from_pointee(data),
-            source_info: format!("local:{}", path),
+            _source_info: format!("local:{}", path),
         })
     }
 
@@ -50,7 +50,7 @@ impl ConfigManager {
 
         Ok(Self {
             current: ArcSwap::from_pointee(merged),
-            source_info: format!("cloud:{}", url),
+            _source_info: format!("cloud:{}", url),
         })
     }
 

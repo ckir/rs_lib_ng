@@ -1,2 +1,2 @@
-pub mod apicall;
+pub mod apicallcnn;
 pub mod fearandgreed;

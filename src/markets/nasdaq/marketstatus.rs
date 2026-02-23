@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use chrono::{Utc, NaiveDate, Duration as ChronoDuration, TimeZone};
 use chrono_tz::US::Eastern;
-use crate::markets::nasdaq::apicall::NasdaqApi;
+ use crate::markets::nasdaq::apicallnasdaq::NasdaqApi;
 use crate::core::error::NgError;
 use crate::loggers::Logger;
 
@@ -26,14 +26,14 @@ pub struct MarketStatusData {
 
 pub struct MarketStatus {
     api: NasdaqApi,
-    logger: Logger,
+    _logger: Logger,
 }
 
 impl MarketStatus {
-    pub fn new(logger: Logger) -> Self {
+    pub fn new(_logger: Logger) -> Self {
         Self { 
-            api: NasdaqApi::new(logger.clone()),
-            logger 
+            api: NasdaqApi::new(_logger.clone()),
+            _logger 
         }
     }
 
